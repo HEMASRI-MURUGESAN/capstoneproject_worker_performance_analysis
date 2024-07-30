@@ -3,83 +3,156 @@
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 
 <head>
-      <meta charset="UTF-8">
-      <title>ML API</title>
-      <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Arimo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Hind:300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
 
+  <style>
+    /* Additional styles (if needed) */
+    /* Add your media queries here */
+    /* For example: */
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      /* Add other responsive styles here */
+    }
+
+    /* Material Design styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	background-color: #4c7faf; /* Green color */
+	color: #333333;
+	margin: 0;
+	padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Pacifico', cursive;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    input[type="text"], button {
+      font-family: 'Arimo', sans-serif;
+      font-size: 18px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px;
+      width: 200px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-bottom: 2px solid #2196F3;
+    }
+
+    button {
+      background-color: #2196F3;
+      color: #fff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1976D2;
+    }
+
+    .prediction {
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 
+<!-- Rest of the HTML content remains the same -->
+
+<!-- Rest of the HTML content remains the same -->
+
+
 <body>
+  <h1>CAPSTONE PROJECT PHASE - II</h1>
+  <br>
+  <br>
+  <div class="center">
+    <h1>WORKER PERFORMANCE PREDICTION</h1>
+  </div>
+  <!-- Main Input For Receiving Query to our ML -->
+  <form action="{{ url_for('predict')}}" method="post">
+    <div class="center">
+      <input type="text" name="age" placeholder="Age" required="required" />
+      <input type="text" name="gender" placeholder="Gender" required="required" />
+      <input type="text" name="edu_bg" placeholder="Educational Background" required="required" />
+      <input type="text" name="marital_stat" placeholder="Marital Status" required="required" />
+      <input type="text" name="emp_dept" placeholder="Employee Department" required="required" />
+    </div>
+    <div class="center">
+      <input type="text" name="emp_job_role" placeholder="Employee Job Role" required="required" />
+      <input type="text" name="BusinessTravelFrequency" placeholder="BusinessTravelFrequency" required="required" />
+      <input type="text" name="DistanceFromHome" placeholder="DistanceFromHome" required="required" />
+      <input type="text" name="EmpEducationLevel" placeholder="EmpEducationLevel" required="required" />
+      <input type="text" name="EmpEnvironmentSatisfaction" placeholder="EmpEnvironmentSatisfaction"
+        required="required" />
+    </div>
+    <div class="center">
+      <input type="text" name="EmpHourlyRate" placeholder="EmpHourlyRate" required="required" />
+      <input type="text" name="EmpJobInvolvement" placeholder="EmpJobInvolvement" required="required" />
+      <input type="text" name="EmpJobLevel" placeholder="EmpJobLevel" required="required" />
+      <input type="text" name="EmpJobSatisfaction" placeholder="EmpJobSatisfaction" required="required" />
+      <input type="text" name="NumCompaniesWorked" placeholder="NumCompaniesWorked" required="required" />
+    </div>
+    <div class="center">
+      <input type="text" name="OverTime" placeholder="OverTime" required="required" />
+      <input type="text" name="EmpLastSalaryHikePercent" placeholder="EmpLastSalaryHikePercent" required="required" />
+      <input type="text" name="EmpRelationshipSatisfaction" placeholder="EmpRelationshipSatisfaction"
+        required="required" />
+      <input type="text" name="TotalWorkExperienceInYears" placeholder="TotalWorkExperienceInYears"
+        required="required" />
+      <input type="text" name="TrainingTimesLastYear" placeholder="TrainingTimesLastYear" required="required" />
+    </div>
+    <div class="center">
+      <input type="text" name="EmpWorkLifeBalance" placeholder="EmpWorkLifeBalance" required="required" />
+      <input type="text" name="ExperienceYearsAtThisCompany" placeholder="ExperienceYearsAtThisCompany"
+        required="required" />
+      <input type="text" name="ExperienceYearsInCurrentRole" placeholder="ExperienceYearsInCurrentRole"
+        required="required" />
+      <input type="text" name="YearsWithCurrManager" placeholder="YearsWithCurrManager" required="required" />
+      <input type="text" name="Attrition" placeholder="Attrition" required="required" />
+    </div>
+    <div class="center">
+      <button type="submit">Predict</button>
+    </div>
+  </form>
 
-      <br>
-      <br>
-      <center>
-            <h1>PREDICT PERFORMANCE RATING</h1>
-      </center>
-      <!-- Main Input For Receiving Query to our ML -->
-      <form action="{{ url_for('predict')}}" method="post">
-            <div class="left1">
-                  <input type="text" name="age" placeholder="Age" required="required" />
-                  <input type="text" name="gender" placeholder="Gender" required="required" />
-                  <input type="text" name="edu_bg" placeholder="Educational Background" required="required" />
-                  <input type="text" name="marital_stat" placeholder="Marital Status" required="required" />
-                  <input type="text" name="emp_dept" placeholder="Employee Department" required="required" />
-            </div>
-            <div class="left2">
-                  <input type="text" name="emp_job_role" placeholder="Employee Job Role" required="required" />
-                  <input type="text" name="BusinessTravelFrequency" placeholder="BusinessTravelFrequency"
-                        required="required" />
-                  <input type="text" name="DistanceFromHome" placeholder="DistanceFromHome" required="required" />
-                  <input type="text" name="EmpEducationLevel" placeholder="EmpEducationLevel" required="required" />
-                  <input type="text" name="EmpEnvironmentSatisfaction" placeholder="EmpEnvironmentSatisfaction"
-                        required="required" />
-            </div>
-            <div class="left3">
-                  <input type="text" name="EmpHourlyRate" placeholder="EmpHourlyRate" required="required" />
-                  <input type="text" name="EmpJobInvolvement" placeholder="EmpJobInvolvement" required="required" />
-                  <input type="text" name="EmpJobLevel" placeholder="EmpJobLevel" required="required" />
-                  <input type="text" name="EmpJobSatisfaction" placeholder="EmpJobSatisfaction" required="required" />
-                  <input type="text" name="NumCompaniesWorked" placeholder="NumCompaniesWorked" required="required" />
-            </div>
-            <div class="left4">
-                  <input type="text" name="OverTime" placeholder="OverTime" required="required" />
-                  <input type="text" name="EmpLastSalaryHikePercent" placeholder="EmpLastSalaryHikePercent"
-                        required="required" />
-                  <input type="text" name="EmpRelationshipSatisfaction" placeholder="EmpRelationshipSatisfaction"
-                        required="required" />
-                  <input type="text" name="TotalWorkExperienceInYears" placeholder="TotalWorkExperienceInYears"
-                        required="required" />
-                  <input type="text" name="TrainingTimesLastYear" placeholder="TrainingTimesLastYear"
-                        required="required" />
-            </div>
-            <div class="left5">
-                  <input type="text" name="EmpWorkLifeBalance" placeholder="EmpWorkLifeBalance" required="required" />
-                  <input type="text" name="ExperienceYearsAtThisCompany" placeholder="ExperienceYearsAtThisCompany"
-                        required="required" />
-                  <input type="text" name="ExperienceYearsInCurrentRole" placeholder="ExperienceYearsInCurrentRole"
-                        required="required" />
-                  <input type="text" name="YearsWithCurrManager" placeholder="YearsWithCurrManager"
-                        required="required" />
-                  <input type="text" name="Attrition" placeholder="Attrition" required="required" />
-            </div>
-            <div class="btcen">
-                  <center> <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button> </center>
-                  <br>
-                  <center>{{ prediction_text }} </center>
-            </div>
-      </form>
-
-      <br>
-      <br>
-
-
-
-
-
+  <div class="prediction">
+    <center>{{ prediction_text }}</center>
+  </div>
+  <br>
+  <br>
 </body>
 
 </html>
+
